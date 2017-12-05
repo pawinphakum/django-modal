@@ -7,11 +7,13 @@
     <h4 class="modal-title">แก้ไขข้อมูล</h4>
   </div>
   <div class="modal-body">
+    <div id="error"></div>
     {% csrf_token %}
     {{ form.as_p }}
   </div>
   <div class="modal-footer">
-    <input type="submit" value="Update" />
+    <!--input type="submit" value="Update" /-->
+    <input type="button" id="id_button" value="Update" />
   </div>
 </form>
 <br><br>
@@ -20,5 +22,16 @@
 <script>
   $("#modal").on('hidden.bs.modal', function(){
     $(this).data('bs.modal', null);
+  });
+
+  $("#id_button").click(function(){
+    regex = /^\d{2}-\d{4}$/g;
+    str = $("#id_sn").val();
+    if(regex.exec(str)){
+      $("form").submit();
+    }
+    else{
+      $("#error").html("ใส่ผิดนะจ๊ะ");
+    }
   });
 </script>
