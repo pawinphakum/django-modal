@@ -33,7 +33,7 @@ class CarForm(ModelForm):
         }
 
 class CarUpdateForm(ModelForm):
-    sn = forms.CharField(label='รหัสsss',
+    sn = forms.CharField(label='รหัส (regex)',
         validators=[CAR_NUMBER_REGEX])
 
     class Meta:
