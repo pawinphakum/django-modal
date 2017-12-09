@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
+from django.views.generic.detail import SingleObjectMixin
 from .models import Car
 from .forms import CarForm, CarUpdateForm
 from django.utils import timezone
@@ -45,8 +46,17 @@ class FormView(FormView):
 class CreateView(CreateView):
     model = Car
     template_name_suffix = '_create_form' # default : '_form.html'
-    # success_url = '/list' # or model - def get_absolute_url(self):
+    success_url = '/create' # or model - def get_absolute_url(self):
     fields = ['name', 'sn']
+
+    def get_context_data(self):
+        context = super(CreateView, self).get_context_data()
+        context['car_list'] = Car.objects.all()
+        return context
+
+    #def form_valid(self, form):
+    #    print('asdasdasdasd')
+    #    return super(CreateView, self).form_valid(form)
 
 # url : pk
 class UpdateView(UpdateView):

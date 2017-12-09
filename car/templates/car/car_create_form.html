@@ -4,4 +4,28 @@
   <input type="submit" value="Save" />
 </form>
 <br><br>
+
+<table border="1">
+  <tr bgcolor="#adcdef">
+    <td>name</td>
+    <td>sn</td>
+    <td>last_accessed</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  {% for car in car_list %}
+  <tr>
+    <td>{{ car.name }}</td>
+    <td>{{ car.sn }}</td>
+    <td>{{ car.last_accessed.time }}</td>
+    <td><a href="detail/{{ car.pk }}">DETAIL</a></td>
+    <td><a data-toggle="modal" data-target="#myModal" href="update/{{ car.pk }}">MODAL</a></td>
+    <td><a href="update/{{ car.pk }}">UPDATE</a></td>
+    <td><a href="delete/{{ car.pk }}">DELETE</a></td>
+  </tr>
+  {% endfor %}
+</table>
+
 <a href="/">INDEX</a>
